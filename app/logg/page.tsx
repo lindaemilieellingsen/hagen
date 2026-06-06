@@ -15,7 +15,7 @@ interface LogEntry {
 export const dynamic = "force-dynamic"
 
 export default async function LoggPage() {
-  const entries = await sql<LogEntry[]>`
+  const entries = (await sql`
     SELECT
       l.id,
       l.content,
@@ -32,7 +32,7 @@ export default async function LoggPage() {
     LEFT JOIN log_photos lp ON lp.entry_id = l.id
     GROUP BY l.id, z.name, p.name
     ORDER BY l.created_at DESC
-  `
+  `) as LogEntry[]
 
   const grouped: Record<string, LogEntry[]> = {}
   for (const entry of entries) {
