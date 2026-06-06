@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Link from "next/link"
 
 const sections = [
@@ -20,6 +21,12 @@ const sections = [
     icon: "🌸",
   },
   {
+    href: "/logg",
+    title: "Hagelogg",
+    description: "Skriv observasjoner og last opp bilder fra hagen",
+    icon: "📓",
+  },
+  {
     href: "/oppgaver",
     title: "Oppgaver",
     description: "Sesongoppgaver og vedlikehold tilpasset Oslo-klima",
@@ -28,7 +35,7 @@ const sections = [
   {
     href: "/bilder",
     title: "Bildelogg",
-    description: "Følg hagens utvikling over tid",
+    description: "Følg hagens utvikling gjennom sesongene",
     icon: "📷",
   },
 ]
@@ -36,9 +43,19 @@ const sections = [
 export default function Home() {
   return (
     <main className="max-w-4xl mx-auto px-4 py-12">
-      <div className="mb-10">
-        <h1 className="text-4xl font-semibold text-stone-800 mb-2">Hagen</h1>
-        <p className="text-stone-500 text-lg">Oslo, 800-900 m2</p>
+      <div className="mb-8 rounded-2xl overflow-hidden relative h-64 sm:h-80">
+        <Image
+          src="/huset.avif"
+          alt="Guldbergs vei 22B"
+          fill
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 p-6">
+          <h1 className="text-3xl font-semibold text-white mb-1">Hagen</h1>
+          <p className="text-white/80 text-sm">Guldbergs vei 22B, Oslo &mdash; 865 m²</p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
