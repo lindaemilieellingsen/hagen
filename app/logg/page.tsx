@@ -1,3 +1,4 @@
+import Image from "next/image"
 import sql from "@/lib/db"
 import { getSeason, SEASONS, formatDate } from "@/lib/seasons"
 import LoggForm from "./LoggForm"
@@ -70,13 +71,23 @@ export default async function LoggPage() {
             </div>
             <div className="flex flex-col gap-4">
               {items.map((entry) => (
-                <div
-                  key={entry.id}
-                  className="rounded-xl border border-stone-200 bg-white p-5"
-                >
+                <div key={entry.id} className="rounded-xl border border-stone-200 bg-white p-5">
                   <p className="text-stone-800 text-sm whitespace-pre-wrap leading-relaxed">
                     {entry.content}
                   </p>
+
+                  {entry.photos.length > 0 && (
+                    <div className="flex gap-2 mt-3 flex-wrap">
+                      {entry.photos.map((url, i) => (
+                        <a key={i} href={url} target="_blank" rel="noopener noreferrer">
+                          <div className="relative w-24 h-24 rounded-lg overflow-hidden border border-stone-200 hover:opacity-90 transition-opacity">
+                            <Image src={url} alt="" fill className="object-cover" />
+                          </div>
+                        </a>
+                      ))}
+                    </div>
+                  )}
+
                   <div className="flex flex-wrap gap-2 mt-3">
                     {entry.zone_name && (
                       <span className="text-xs bg-stone-100 text-stone-600 px-2 py-0.5 rounded-full">
